@@ -1,0 +1,374 @@
+---
+const obrasDisponibles = [
+  {
+    title: 'Hora de Colación',
+    year: 'Obra',
+    genre: 'Monólogo',
+    image: '/images/valemiri.jpg',
+    summary: 'Monólogo de una trabajadora del aseo encerrada en su horario de almuerzo.',
+    details: [
+      'Dramaturgia e interpretación: Valentina Durán',
+      'Estreno: 2025'
+    ],
+    description: 'Monólogo que presenta al personaje de Miriam, una trabajadora del aseo, que debe quedarse encerrada en su horario de almuerzo. Este hecho, la lleva a cuestionar sus condiciones laborales y las relaciones de poder que se ejercen en su entorno. En un ambiente laboral cada vez más impersonal, mercantil y digital, Miriam deberá enfrentar sus propios razonamientos, anhelos y discrepancias, con las posibilidades que tiene para cambiar su destino.',
+    link: '#' // Placeholder para Link descarga dossier
+  },
+  {
+    title: 'Flor de Humedal',
+    year: 'Obra',
+    genre: 'Familiar',
+    image: '/images/placeholder.svg',
+    summary: 'La historia de un grupo de animales que defienden su humedal ante la amenaza humana.',
+    details: [
+      'Autoría: Valentina Durán',
+      'Estreno: 2024'
+    ],
+    description: 'Cuenta la historia de un grupo de animales que habitan un humedal en la región del Biobío, y que ve amenazado su hábitat por la codicia humana que rellena las aguas para hacer grandes construcciones de cemento sin considerar el bienestar del ecosistema, flora y fauna, ni de las personas que habitan alrededor. Los animales huyen asustados e indefensos sin saber qué hacer y teniendo mucho miedo de los humanos, hasta que conocen a un niña, Flor, quien se gana su confianza y juntos inician un plan de rescate del lugar.',
+    link: '#' // Placeholder para Link descarga dossier
+  }
+];
+
+const obrasAnteriores = [
+  {
+    title: 'Campo de Batalla. Las Ruinas de Estocolmo',
+    year: 'Obra Anterior',
+    genre: 'Drama',
+    image: '/images/placeholder.svg',
+    summary: 'Una joven prostituta y un obrero se encuentran en un motel barato develando las estructuras de poder que los oprimen.',
+    details: [
+      'Dirección: Valentina Durán',
+      'Elenco: Patricia Michele, Carlos González'
+    ],
+    description: 'En la pieza de un motel barato se reúnen Romina, una joven prostituta con alguna inquietud por la escritura, y Antonio, un obrero que se enfrenta como mejor puede a la soledad y la falta de medios. Entre ambos hay una relación indefinida, sostenida desde hace tiempo, pero siempre mediada por su carácter comercial. A través del relato, se van develando las estructuras de poder que limitan a la pareja, presa de un sistema que los oprime y los empuja a contar sus historias, miedos y reflexiones en torno a una sociedad violenta, que impone roles imposibles de alterar, que secuestra los destinos de los personajes. La compañía Teatrhoy invita a encerrarse con los protagonistas en un espacio distópico, pero con evidentes conexiones con la realidad actual.',
+    link: null
+  },
+  {
+    title: 'Montaña',
+    year: 'Obra Anterior',
+    genre: 'Drama antropológico',
+    image: '/images/montaña.jpg',
+    summary: 'Un investigador busca pistas de la desaparición de tres jóvenes en un proyecto turístico austral.',
+    details: [
+      'Dirección: Roxana Concha',
+      'Elenco: Valentina Durán, Jorge Lagos, Roxana Concha'
+    ],
+    description: 'A través de un peritaje antropológico, un investigador busca pistas para reconstituir la historia previa a la desaparición de tres jóvenes que llegaron a trabajar durante un año en un proyecto turístico en la región austral de Pueblo Nuevo. Mediante esta obra, la compañía reflexiona sobre el tiempo primitivo que rige la vida de los pueblos originarios, y lo contrapone con la realidad del humano contemporáneo, cuestionando temas como la identidad, la autonomía y la trascendencia de nuestra especie.',
+    link: null
+  },
+  {
+    title: 'La Chilena',
+    year: 'Obra Anterior',
+    genre: 'Drama Político',
+    image: '/images/lachilena.jpg',
+    summary: 'La transformación vital de una mujer que se convierte en activista política y es acusada de terrorismo.',
+    details: [
+      'Dirección: Valentina Durán',
+      'Elenco: Roxana Concha, Jorge Lagos'
+    ],
+    description: 'La historia de una mujer que luego de una serie de acontecimientos que la hacen cuestionarse la forma en que ha estado viviendo, decide cambiar el rumbo de su existencia, tomando una de las determinaciones más importantes de su vida: convertirse en activista política. Esta determinación, pronto la llevará a estar acusada de terrorismo y condenada a pena de muerte. A través de este montaje, la compañía reflexiona en torno a la actualidad política, al manejo de la información y al poder.',
+    link: null
+  },
+  {
+    title: 'El Péndulo de la Muerte',
+    year: 'Texto',
+    genre: 'Drama / Comedia',
+    image: '/images/placeholder.svg',
+    summary: 'Dos amigos chilenos escapan de la justicia y se unen a un circo en Argentina.',
+    details: [
+      'Basada en hechos reales'
+    ],
+    description: 'Dos amigos chilenos, cruzan a Argentina por un paso no autorizado, escapando de la justicia. Allá deciden cambiar de vida y se unen a un circo en donde llegan a ser estrellas del Péndulo de la Muerte, itineran, se enamoran y forman familia, hasta que por una traición, son descubiertos. Aún así se las ingenian para burlar su suerte. Inspirada en la Historia Real de Los Hermanos Arenas en el Circo Rodas de Argentina.',
+    link: null
+  }
+];
+
+const todasLasObras = [...obrasDisponibles, ...obrasAnteriores];
+---
+
+<section id="obras" class="section obras-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label reveal">Repertorio</span>
+      <h2 class="section-title reveal">Obras de Teatro</h2>
+      <p class="section-subtitle reveal">
+        Producciones que desafían los límites del escenario convencional
+      </p>
+    </div>
+
+    <div class="obras-list stagger">
+      {todasLasObras.map((obra, i) => (
+        <details class="obra-item reveal">
+          <summary class="obra-trigger">
+            <span class="obra-info">
+              <span class="obra-meta">
+                <span class="obra-year">{obra.year}</span>
+                <span class="obra-dot">·</span>
+                <span class="obra-genre">{obra.genre}</span>
+              </span>
+              <span class="obra-title">{obra.title}</span>
+              <span class="obra-summary">{obra.summary}</span>
+            </span>
+            <span class="obra-toggle-icon" aria-hidden="true"></span>
+          </summary>
+
+          <div class="obra-panel-body panel-animate">
+            <img class="obra-panel-img" src={obra.image} alt={obra.title} loading="lazy" />
+            <div class="obra-panel-text">
+              <p class="obra-panel-desc">{obra.description}</p>
+              <ul class="obra-panel-list">
+                {obra.details.map((d) => (
+                  <li>{d}</li>
+                ))}
+              </ul>
+              {obra.link && (
+                <div class="obra-download">
+                  <a href={obra.link} class="btn btn-ghost btn-sm">Descarga dossier</a>
+                </div>
+              )}
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <!-- Additional Static Lists -->
+    <div class="obras-extras reveal" style="margin-top: 60px;">
+      <div class="extras-grid">
+        <div class="extra-column">
+          <h3 class="extra-title">Otras Obras de TeatrHoy</h3>
+          <ul class="extra-list">
+            <li>"Paraíso. 30 años como 50 años como 500 años"</li>
+            <li>"Mano a mano"</li>
+            <li>"Cuando Silencie"</li>
+            <li>"Sara Llora"</li>
+            <li>"Niño no te rías"</li>
+            <li>"Cuando gritábamos", muestra de dramaturgia alemana.</li>
+            <li>"Comedia que no acaba", colaboración con colectivo internacional Nadieshda.</li>
+          </ul>
+        </div>
+        <div class="extra-column">
+          <h3 class="extra-title">Participación en otros montajes</h3>
+          <ul class="extra-list">
+            <li>Actriz, obra "Grisú, esta historia no está terminada", compañía Dramaturgia Clandestina.</li>
+            <li>Actriz, obra "Julieta y Romeo", compañía La Otra Zapatilla.</li>
+            <li>Actriz, obra "Amor ir", compañía Ander Blu, dirección Rodrigo Achondo.</li>
+            <li>Actriz, obra "W=S", dirección Paula González.</li>
+            <li>Actriz, obra "Alcalde", dirección Sebastián Torres.</li>
+            <li>Actriz, obra "Sobre los verdaderos diamantes", compañía El Hacedor.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .obras-section {
+    background: var(--bg-secondary);
+  }
+
+  .obras-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .obra-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    overflow: hidden;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .obra-item:hover,
+  .obra-item[open] {
+    border-color: var(--border-medium);
+    background: var(--bg-card-hover);
+  }
+
+  .obra-trigger {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    gap: 20px;
+    align-items: center;
+    padding: 24px 28px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .obra-trigger::-webkit-details-marker { display: none; }
+  .obra-trigger::marker { display: none; content: ''; }
+
+  .obra-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .obra-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .obra-year {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+  .obra-dot { color: var(--text-muted); font-size: 0.7rem; }
+  .obra-genre {
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .obra-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+  }
+  .obra-item:hover .obra-title,
+  .obra-item[open] .obra-title { color: var(--accent); }
+
+  .obra-summary {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  /* Toggle icon */
+  .obra-toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-subtle);
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    transition: border-color 0.3s ease;
+  }
+  .obra-toggle-icon::after { content: '+'; }
+  .obra-item[open] .obra-toggle-icon::after { content: '−'; }
+  .obra-item:hover .obra-toggle-icon,
+  .obra-item[open] .obra-toggle-icon { border-color: var(--accent); }
+
+  /* Panel */
+  @keyframes panelSlideDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .obra-panel-body {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: panelSlideDown 0.6s ease-out;
+  }
+
+  .obra-panel-img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: cover;
+    display: block;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .obra-panel-text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .obra-panel-desc {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .obra-panel-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    padding: 0;
+  }
+  .obra-panel-list li {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    padding-left: 16px;
+    position: relative;
+  }
+  .obra-panel-list li::before {
+    content: '◇';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.55rem;
+    top: 3px;
+  }
+
+  .obra-download {
+    margin-top: 16px;
+  }
+
+  .extras-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    padding: 30px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .extra-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .extra-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .extra-list li {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .extra-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    opacity: 0.5;
+    font-size: 0.9rem;
+    top: 0;
+  }
+
+  @media (max-width: 768px) {
+    .obra-trigger {
+      grid-template-columns: 1fr 36px;
+      padding: 20px;
+      gap: 12px;
+    }
+    .obra-panel-body { padding: 20px; }
+    .obra-panel-list { grid-template-columns: 1fr; }
+    .extras-grid {
+      grid-template-columns: 1fr;
+      padding: 20px;
+    }
+  }
+</style>

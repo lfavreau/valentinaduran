@@ -1,0 +1,333 @@
+---
+
+---
+
+<section id="inicio" class="hero">
+  <div class="hero-bg">
+    <div class="hero-gradient"></div>
+    <div class="hero-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <div class="hero-content container">
+    <div class="hero-overline reveal">Actriz, Pedagoga Teatral & Directora</div>
+    <h1 class="hero-title">
+      <span class="hero-word reveal" style="--delay: 0.1s">Valentina</span>
+      <br />
+      <span class="hero-word reveal" style="--delay: 0.2s">Durán</span>
+    </h1>
+    <p class="hero-subtitle reveal" style="--delay: 0.3s">
+      Teatrhoy · Proyectos · Territorio
+    </p>
+    <div class="hero-divider reveal" style="--delay: 0.5s">
+      <span class="diamond"></span>
+    </div>
+    <div class="hero-desc reveal" style="--delay: 0.6s">
+      <p>
+        Actriz, licenciada en actuación. Egresada de Magíster en Pedagogía Teatral. Universidad del Desarrollo. 
+        Es co fundadora y actual directora de la compañía Teatrhoy. Ha sido docente y dirigido múltiples procesos 
+        teatrales comunitarios así como recreaciones históricas.
+      </p>
+      <details class="hero-bio-details">
+        <summary class="hero-bio-summary btn btn-ghost btn-sm"><span class="summary-text">Leer más...</span></summary>
+        <div class="hero-bio-expanded">
+          <p>
+            Ha sido gestora de espacios artísticos, Del Aire Artería 2010-2013, 3A Estudio 2014-2015, Sala Namaste 2025 a la actualidad. 
+            Fue productora regional de la Fundación Trashumantes entre el 2019 y 2021. Fue coordinadora regional de la iniciativa estatal Patios Culturales en el 2023. 
+            Desde el 2011 trabaja en el Festival Internacional de Teatro del Biobío en donde actualemente es coordinadora de vinculación y territorio.
+          </p>
+          <p>
+            En el 2025 continuó con funciones de Flor de Humedal de su autoría (estrenada el 2024), estrenó el monólogo Hora de Colación 
+            (dramaturgia e interpretación), y realizó dos temporadas de su Taller de Teatro Nocturno en Concepción. 
+            En enero del 2026 realizó el Taller de Teatro de Verano en dos secciones mañana y tarde.
+          </p>
+        </div>
+      </details>
+    </div>
+    <div class="hero-cta reveal" style="--delay: 0.8s">
+      <a href="#obras" class="btn">Explorar Obras</a>
+      <a href="#contacto" class="btn btn-ghost">Contacto</a>
+    </div>
+  </div>
+
+  <div id="hero-scroll" class="hero-scroll reveal" style="--delay: 1s">
+    <span class="scroll-text">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('/images/vale.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.15; /* Subdued so text is readable */
+  }
+
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 60% 50% at 50% 40%,
+      rgba(157, 125, 197, 0.06) 0%,
+      transparent 70%
+    );
+  }
+
+  /* Animated vertical lines */
+  .hero-lines {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 10%;
+  }
+
+  .line {
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(157, 125, 197, 0.06) 50%,
+      transparent 100%
+    );
+    animation: linePulse 8s ease-in-out infinite;
+  }
+  .line:nth-child(2) { animation-delay: 1.5s; }
+  .line:nth-child(3) { animation-delay: 3s; }
+  .line:nth-child(4) { animation-delay: 4.5s; }
+  .line:nth-child(5) { animation-delay: 6s; }
+
+  @keyframes linePulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding-top: 40px;
+  }
+
+  .hero-overline {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 24px;
+    transition-delay: var(--delay, 0s);
+  }
+
+  .hero-title {
+    margin-bottom: 20px;
+  }
+
+  .hero-word {
+    display: inline-block;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    background: linear-gradient(
+      110deg,
+      var(--accent) 0%,
+      var(--accent) 45%,
+      rgba(255, 255, 255, 0.6) 50%,
+      var(--accent) 55%,
+      var(--accent) 100%
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 12s linear infinite;
+    transition-delay: var(--delay, 0s);
+  }
+
+  @keyframes shine {
+    from { background-position: 150% 0; }
+    to { background-position: -150% 0; }
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-secondary);
+    letter-spacing: 0.15em;
+    margin-bottom: 32px;
+    transition-delay: var(--delay, 0s);
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    transition-delay: var(--delay, 0s);
+  }
+
+  .hero-divider::before,
+  .hero-divider::after {
+    content: '';
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-dark));
+  }
+  .hero-divider::after {
+    background: linear-gradient(90deg, var(--accent-dark), transparent);
+  }
+
+  .diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .hero-desc {
+    max-width: 560px;
+    margin: 0 auto 48px;
+    font-size: clamp(0.92rem, 1.1vw, 1.05rem);
+    line-height: 1.8;
+    color: var(--text-muted);
+    transition-delay: var(--delay, 0s);
+  }
+  .hero-desc p {
+    margin-bottom: 16px;
+  }
+  .hero-desc p:last-child {
+    margin-bottom: 0;
+  }
+
+  .hero-bio-details {
+    margin-top: 24px;
+    text-align: center;
+  }
+  
+  .hero-bio-summary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.8rem;
+    padding: 6px 16px;
+  }
+  .hero-bio-summary::-webkit-details-marker { display: none; }
+  .hero-bio-summary::marker { display: none; content: ''; }
+  
+  .hero-bio-details[open] .hero-bio-summary {
+    margin-bottom: 24px;
+    opacity: 0.7;
+  }
+  .hero-bio-details[open] .summary-text {
+    display: none;
+  }
+  .hero-bio-details[open] .hero-bio-summary::after {
+    content: 'Leer menos';
+  }
+  /* When open, we can hide the text 'Leer más...' using a trick or just let it say Leer más...menos. Let's just use a simple approach: if open, change text or just keep it simple. */
+
+  .hero-bio-expanded {
+    animation: fadeInBio 0.4s ease-out;
+  }
+
+  @keyframes fadeInBio {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    transition-delay: var(--delay, 0s);
+  }
+
+  .btn-ghost {
+    border-color: var(--text-muted);
+    color: var(--text-secondary);
+  }
+  .btn-ghost::before {
+    background: var(--text-secondary);
+  }
+  .btn-ghost:hover {
+    color: var(--bg-primary);
+    border-color: var(--text-secondary);
+  }
+
+  .hero-scroll {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 46px; /* Matches back-to-top button width for centering */
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition-delay: var(--delay, 0s);
+  }
+  
+  .hero-scroll.hidden {
+    opacity: 0 !important;
+    pointer-events: none;
+    transform: translateY(20px) !important;
+  }
+
+  .scroll-text {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollBounce 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: scaleY(0.5); opacity: 0.3; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-cta {
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-scroll {
+      display: none;
+    }
+  }
+</style>

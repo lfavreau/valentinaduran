@@ -1,0 +1,167 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Liviana — Teatro, Talleres & Recreaciones Históricas',
+  description = 'Portafolio de obras de teatro, talleres creativos, recreaciones históricas y más. Experiencias escénicas únicas.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- OG -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <title>{title}</title>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <slot />
+
+    <!-- Back to top -->
+    <button id="back-to-top" class="back-to-top" aria-label="Volver al inicio" title="Volver al inicio">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
+
+    <script>
+      // Reveal on scroll — IntersectionObserver
+      const observerOptions: IntersectionObserverInit = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px',
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Navbar scroll effect + Back to top visibility
+      const navbar = document.getElementById('navbar');
+      const backToTop = document.getElementById('back-to-top');
+      const heroScroll = document.getElementById('hero-scroll');
+      
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        if (navbar) {
+          navbar.classList.toggle('scrolled', y > 60);
+        }
+        if (backToTop) {
+          backToTop.classList.toggle('visible', y > 400);
+        }
+        if (heroScroll) {
+          heroScroll.classList.toggle('hidden', y > 400);
+        }
+      });
+
+      // Back to top click
+      if (backToTop) {
+        backToTop.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // Mobile menu toggle
+      const menuToggle = document.getElementById('menu-toggle');
+      const navLinks = document.getElementById('nav-links');
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('open');
+          menuToggle.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+            menuToggle.classList.remove('active');
+          });
+        });
+      }
+
+      // Smooth expand/collapse for <details> elements
+      document.querySelectorAll('details').forEach((det) => {
+        const summary = det.querySelector('summary')!;
+        let animating = false;
+
+        summary.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (animating) return;
+          animating = true;
+
+          if (det.open) {
+            // === CLOSING ===
+            const startH = det.offsetHeight;
+            const content = det.querySelector('summary ~ *') as HTMLElement;
+            // Fade out content
+            if (content) {
+              content.animate(
+                [{ opacity: 1 }, { opacity: 0 }],
+                { duration: 200, easing: 'ease-in' }
+              );
+            }
+            // Shrink card height
+            const endH = summary.offsetHeight;
+            det.animate(
+              [
+                { height: startH + 'px', overflow: 'hidden' },
+                { height: endH + 'px', overflow: 'hidden' },
+              ],
+              { duration: 350, easing: 'ease-in-out' }
+            ).onfinish = () => {
+              det.open = false;
+              animating = false;
+            };
+          } else {
+            // === OPENING ===
+            const startH = det.offsetHeight;
+            det.open = true;
+            const endH = det.offsetHeight;
+            // Expand card height
+            det.animate(
+              [
+                { height: startH + 'px', overflow: 'hidden' },
+                { height: endH + 'px', overflow: 'hidden' },
+              ],
+              { duration: 450, easing: 'ease-out' }
+            ).onfinish = () => { animating = false; };
+            // Slide in content
+            const content = det.querySelector('summary ~ *') as HTMLElement;
+            if (content) {
+              content.animate(
+                [
+                  { opacity: 0, transform: 'translateY(-20px)' },
+                  { opacity: 1, transform: 'translateY(0)' },
+                ],
+                { duration: 500, easing: 'ease-out', fill: 'forwards' }
+              );
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

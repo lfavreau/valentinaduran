@@ -1,0 +1,236 @@
+---
+const proyectos = [
+  {
+    title: 'Teatro Comunitario',
+    location: 'Región del Biobío',
+    image: '/images/recreación1.jpg',
+    summary: 'Múltiples talleres y montajes teatrales realizados en diversas instituciones y comunas de la región.',
+    description: 'Entre el 2013 y 2021 directora teatral en el Centro Cultural La Espada y el Canelo de Nacimiento realizando montajes y radioteatros, destacando "La asamblea de las Mujeres" que realizó una itinerancia regional.',
+    details: [
+      'Don Juan en el Bar Ruiz Carl',
+      'La Asamblea de las Mujeres',
+      'Autótrofas',
+      'Cruzando el río, memorias pedregosas (Curanilahue)'
+    ],
+  },
+  {
+    title: 'Teatro Pedagógico Online',
+    location: 'Digital',
+    image: '/images/recración2.jpg',
+    summary: 'Obras digitales con fines educativos, una línea de trabajo para entregar pedagogía online cercana y entretenida.',
+    description: 'El 2020 la compañía Teatrhoy estrena su primera obra digital con fines educativos y abre una línea de trabajo dedicada especialmente a entregar una pedagogía online cercana y entretenida.',
+    details: [
+      'Obras a pedido',
+      'Obras comunitarias',
+      'Intervenciones'
+    ],
+  },
+  {
+    title: 'Intervenciones y Obras',
+    location: 'Instituciones',
+    image: '/images/recreación3.jpg',
+    summary: 'Diversas intervenciones como actriz, creación de guiones, montajes, dirección y creación de elencos.',
+    description: 'Trabajo artístico y formativo enfocado en desarrollar guiones, montajes y presentaciones especiales para diversas instituciones públicas y privadas a través de experiencias teatrales directas.',
+    details: [
+      'Revista Vía Los Ángeles',
+      'Día de la Mujer Trabajadora (Serviu Biobío)',
+      'Afectividad y género (Muni. Hualpén)',
+      'El Tren de San Rosendo (Sernatur Biobío)'
+    ],
+  },
+  {
+    title: 'Recreaciones Históricas',
+    location: 'Sitios Urbanos y Rurales',
+    image: '/images/recreación1.jpg',
+    summary: 'Circuito de recreaciones históricas con 42 funciones al aire libre en la región del Biobío.',
+    description: 'Escritura de guiones, formación de elencos y dirección del Circuito de Recreaciones Históricas de la región del Biobío, con 42 funciones al aire libre en sitios históricos urbanos y rurales. Organizado junto a la Consultora Austral Solutios y Sernatur Biobío.',
+    details: [
+      'Nacimiento, Penco, Talcahuano',
+      'Portezuelo, La Puntilla de Perales',
+      'Cerro Gavilán',
+      'Plaza Independencia'
+    ],
+  },
+];
+---
+
+<section id="proyectos" class="section proyectos-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label reveal">Impacto y Territorio</span>
+      <h2 class="section-title reveal">Proyectos e Intervenciones</h2>
+      <p class="section-subtitle reveal">
+        Teatro comunitario, pedagógico y recreaciones históricas en la región
+      </p>
+    </div>
+
+    <div class="rec-list stagger">
+      {proyectos.map((evento) => (
+        <details class="rec-item reveal">
+          <summary class="rec-trigger">
+            <span class="rec-info">
+              <span class="rec-title">{evento.title}</span>
+              <span class="rec-location">
+                <span class="loc-icon">◇</span> {evento.location}
+              </span>
+              <span class="rec-summary">{evento.summary}</span>
+            </span>
+            <span class="rec-toggle-icon" aria-hidden="true"></span>
+          </summary>
+
+          <div class="rec-panel-body panel-animate">
+            <img class="rec-panel-img" src={evento.image} alt={evento.title} loading="lazy" />
+            <p class="rec-panel-desc">{evento.description}</p>
+            <ul class="rec-panel-list">
+              {evento.details.map((d) => (
+                <li>{d}</li>
+              ))}
+            </ul>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .proyectos-section {
+    background: var(--bg-secondary);
+  }
+
+  .rec-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rec-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    overflow: hidden;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .rec-item:hover,
+  .rec-item[open] {
+    border-color: var(--border-medium);
+    background: var(--bg-card-hover);
+  }
+
+  .rec-trigger {
+    display: grid;
+    grid-template-columns: 1fr 36px;
+    gap: 20px;
+    align-items: center;
+    padding: 24px 28px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .rec-trigger::-webkit-details-marker { display: none; }
+  .rec-trigger::marker { display: none; content: ''; }
+
+  .rec-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .rec-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+  }
+  .rec-item:hover .rec-title,
+  .rec-item[open] .rec-title { color: var(--accent); }
+
+  .rec-location {
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+  }
+  .loc-icon { color: var(--accent); font-size: 0.6rem; }
+
+  .rec-summary {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  .rec-toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-subtle);
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    transition: border-color 0.3s ease;
+  }
+  .rec-toggle-icon::after { content: '+'; }
+  .rec-item[open] .rec-toggle-icon::after { content: '−'; }
+  .rec-item:hover .rec-toggle-icon,
+  .rec-item[open] .rec-toggle-icon { border-color: var(--accent); }
+
+  /* Panel */
+  @keyframes panelSlideDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .rec-panel-body {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: panelSlideDown 0.6s ease-out;
+  }
+
+  .rec-panel-img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: cover;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .rec-panel-desc {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .rec-panel-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  .rec-panel-list li {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    padding-left: 14px;
+    position: relative;
+  }
+  .rec-panel-list li::before {
+    content: '◇';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.55rem;
+    top: 3px;
+  }
+
+  @media (max-width: 768px) {
+    .rec-trigger {
+      padding: 20px;
+      gap: 12px;
+    }
+    .rec-panel-body { padding: 20px; }
+    .rec-panel-list { grid-template-columns: 1fr; }
+  }
+</style>

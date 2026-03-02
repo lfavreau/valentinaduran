@@ -1,0 +1,239 @@
+---
+const premios = [
+  {
+    year: '2024',
+    title: 'Premio Nacional de Artes Escénicas',
+    category: 'Mejor Dirección',
+    image: '/images/placeholder-sm.svg',
+    summary: 'Por la dirección de "El Último Acto", reconocida por su innovación narrativa.',
+    description: 'El jurado destacó la visión creativa y la capacidad de transformar un texto íntimo en una experiencia colectiva poderosa. La dirección fue elogiada por su uso innovador del espacio escénico, la precisión en el trabajo actoral y la integración de elementos visuales y sonoros.',
+  },
+  {
+    year: '2023',
+    title: 'Festival Internacional de Teatro',
+    category: 'Mejor Producción',
+    image: '/images/placeholder-sm.svg',
+    summary: 'Selección oficial y premio del jurado por "Sombras de Mediodía".',
+    description: 'Seleccionada entre más de 200 producciones internacionales, "Sombras de Mediodía" recibió el galardón máximo por su capacidad de fusionar humor y profundidad emocional.',
+  },
+  {
+    year: '2023',
+    title: 'Fondos de Cultura',
+    category: 'Proyecto Destacado',
+    image: '/images/placeholder-sm.svg',
+    summary: 'Financiamiento completo para el programa de talleres comunitarios.',
+    description: 'El Consejo de la Cultura otorgó financiamiento completo al programa "Teatro en tu Barrio", que lleva talleres gratuitos de expresión dramática a comunidades rurales y periféricas.',
+  },
+  {
+    year: '2022',
+    title: 'Encuentro Latinoamericano de Teatro',
+    category: 'Mención Especial',
+    image: '/images/placeholder-sm.svg',
+    summary: 'Reconocimiento por la difusión del teatro histórico.',
+    description: 'El comité organizador reconoció la trayectoria de Liviana en la investigación y difusión del patrimonio cultural a través de las artes escénicas.',
+  },
+  {
+    year: '2021',
+    title: 'Premio Municipal de las Artes',
+    category: 'Trayectoria',
+    image: '/images/placeholder-sm.svg',
+    summary: 'Por más de una década de trabajo en producción teatral local.',
+    description: 'Reconocimiento a más de diez años de trabajo sostenido en la creación teatral, formación artística y gestión cultural.',
+  },
+];
+---
+
+<section id="premios" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label reveal">Reconocimientos</span>
+      <h2 class="section-title reveal">Premios & Distinciones</h2>
+      <p class="section-subtitle reveal">
+        Trayectoria reconocida a nivel nacional e internacional
+      </p>
+    </div>
+
+    <div class="premios-list stagger">
+      {premios.map((premio) => (
+        <details class="premio-item reveal">
+          <summary class="premio-trigger">
+            <span class="premio-left">
+              <span class="premio-year">{premio.year}</span>
+              <span class="premio-trophy">✧</span>
+            </span>
+            <span class="premio-info">
+              <span class="premio-category">{premio.category}</span>
+              <span class="premio-title">{premio.title}</span>
+              <span class="premio-summary">{premio.summary}</span>
+            </span>
+            <span class="premio-toggle-icon" aria-hidden="true"></span>
+          </summary>
+
+          <div class="premio-panel-body panel-animate">
+            <img class="premio-panel-img" src={premio.image} alt={premio.title} loading="lazy" />
+            <p class="premio-panel-desc">{premio.description}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .premios-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .premio-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    overflow: hidden;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .premio-item:hover,
+  .premio-item[open] {
+    border-color: var(--border-medium);
+    background: var(--bg-card-hover);
+  }
+
+  .premio-trigger {
+    display: grid;
+    grid-template-columns: 80px 1fr 36px;
+    gap: 16px;
+    align-items: center;
+    padding: 20px 24px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .premio-trigger::-webkit-details-marker { display: none; }
+  .premio-trigger::marker { display: none; content: ''; }
+
+  .premio-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .premio-year {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+  }
+  .premio-item:hover .premio-year,
+  .premio-item[open] .premio-year { color: var(--accent); }
+
+  .premio-trophy {
+    font-size: 1.1rem;
+    color: var(--accent);
+    opacity: 0.4;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .premio-item:hover .premio-trophy,
+  .premio-item[open] .premio-trophy {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+
+  .premio-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .premio-category {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .premio-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+  }
+  .premio-item:hover .premio-title,
+  .premio-item[open] .premio-title { color: var(--accent); }
+
+  .premio-summary {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  .premio-toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-subtle);
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    transition: border-color 0.3s ease;
+  }
+  .premio-toggle-icon::after { content: '+'; }
+  .premio-item[open] .premio-toggle-icon::after { content: '−'; }
+  .premio-item:hover .premio-toggle-icon,
+  .premio-item[open] .premio-toggle-icon { border-color: var(--accent); }
+
+  /* Panel */
+  @keyframes panelSlideDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .premio-panel-body {
+    padding: 24px;
+    display: grid;
+    animation: panelSlideDown 0.6s ease-out;
+    grid-template-columns: 140px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .premio-panel-img {
+    width: 140px;
+    height: 105px;
+    object-fit: cover;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .premio-panel-desc {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .premio-trigger {
+      grid-template-columns: 1fr 36px;
+      gap: 10px;
+      padding: 18px 20px;
+    }
+    .premio-left { display: none; }
+    .premio-category::before {
+      content: '✧ ';
+      color: var(--accent);
+    }
+    .premio-panel-body {
+      grid-template-columns: 1fr;
+      padding: 20px;
+    }
+    .premio-panel-img {
+      width: 100%;
+      height: auto;
+      max-height: 180px;
+    }
+  }
+</style>

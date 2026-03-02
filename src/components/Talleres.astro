@@ -1,0 +1,269 @@
+---
+const talleres = [
+  {
+    title: 'Taller de Teatro Nocturno',
+    duration: '2 Temporadas',
+    level: 'Jóvenes y Adultos',
+    icon: '☾',
+    image: '/images/placeholder.svg',
+    summary: 'Espacio de exploración y formación actoral para aficionados y público general en horario vespertino.',
+    description: 'Taller enfocado en el aprendizaje de técnicas de actuación, expresión vocal y corporal, y desinhibición. A través de este proceso se monta una muestra final con los participantes.',
+    details: [
+      '1ª Temporada: Bajo el Poste',
+      '2ª Temporada: Malón',
+      'Incluye muestra final actoral'
+    ],
+  },
+  {
+    title: 'Taller de Teatro de Verano',
+    duration: 'Enero',
+    level: 'Todos los niveles',
+    icon: '☀',
+    image: '/images/placeholder.svg',
+    summary: 'Intensivo de verano organizado en secciones de mañana y tarde para el desarrollo de aptitudes expresivas.',
+    description: 'Un ciclo intensivo durante el mes de enero destinado a explorar diversas herramientas teatrales, fomentar la creatividad y el trabajo en equipo en un ambiente lúdico y distendido.',
+    details: [
+      'Sección mañana',
+      'Sección tarde',
+      'Formato intensivo de verano'
+    ],
+  },
+  {
+    title: 'Taller de Juego Teatral para Infancias',
+    duration: 'Continuo',
+    level: 'Niños y Niñas',
+    icon: '★',
+    image: '/images/placeholder.svg',
+    summary: 'Aproximación al teatro a través del juego, estimulando la imaginación, la empatía y la socialización.',
+    description: 'Un espacio seguro y divertido donde los más pequeños pueden descubrir el mundo del teatro mediante juegos simbólicos asumiendo diferentes roles y creando historias.',
+    details: [
+      'Enfoque lúdico',
+      'Desarrollo socioemocional',
+      'Herramientas de expresión'
+    ],
+  },
+  {
+    title: 'Asesoría y Clases de Hablar en Público',
+    duration: 'Personalizado',
+    level: 'Profesionales y Estudiantes',
+    icon: '💬',
+    image: '/images/placeholder.svg',
+    summary: 'Desarrollo de habilidades de comunicación interpersonal y construcción de discursos efectivos.',
+    description: 'Taller teórico práctico destinado a desarrollar las habilidades de comunicación interpersonal, a la toma de consciencia de los lenguajes verbales, corporales y vocales, y a la construcción de un discurso.',
+    details: [
+      'Técnicas vocales y respiración',
+      'Expresión corporal',
+      'Manejo del pánico escénico'
+    ],
+  },
+];
+---
+
+<section id="talleres" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label reveal">Formación</span>
+      <h2 class="section-title reveal">Talleres</h2>
+      <p class="section-subtitle reveal">
+        Espacios de aprendizaje donde el arte escénico cobra vida
+      </p>
+    </div>
+
+    <div class="talleres-grid stagger">
+      {talleres.map((taller) => (
+        <details class="taller-item reveal-scale">
+          <summary class="taller-trigger">
+            <span class="taller-icon">{taller.icon}</span>
+            <span class="taller-info">
+              <span class="taller-title">{taller.title}</span>
+              <span class="taller-summary">{taller.summary}</span>
+              <span class="taller-tags">
+                <span class="taller-tag">◷ {taller.duration}</span>
+                <span class="taller-tag">▲ {taller.level}</span>
+              </span>
+            </span>
+            <span class="taller-toggle-icon" aria-hidden="true"></span>
+          </summary>
+
+          <div class="taller-panel-body panel-animate">
+            <img class="taller-panel-img" src={taller.image} alt={taller.title} loading="lazy" />
+            <p class="taller-panel-desc">{taller.description}</p>
+            <ul class="taller-panel-list">
+              {taller.details.map((d) => (
+                <li>{d}</li>
+              ))}
+            </ul>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .talleres-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    align-items: start;
+  }
+
+  .taller-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    overflow: hidden;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+
+  .taller-item:hover,
+  .taller-item[open] {
+    border-color: var(--border-medium);
+    background: var(--bg-card-hover);
+  }
+
+  /* Gold top accent */
+  .taller-item::before {
+    content: '';
+    display: block;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out-expo);
+  }
+  .taller-item:hover::before,
+  .taller-item[open]::before { transform: scaleX(1); }
+
+  .taller-trigger {
+    display: grid;
+    grid-template-columns: 36px 1fr 36px;
+    gap: 16px;
+    align-items: start;
+    padding: 24px;
+    cursor: pointer;
+    list-style: none;
+  }
+  /* Remove default arrow in all browsers */
+  .taller-trigger::-webkit-details-marker { display: none; }
+  .taller-trigger::marker { display: none; content: ''; }
+
+  .taller-icon {
+    font-size: 1.4rem;
+    color: var(--accent);
+    opacity: 0.6;
+    padding-top: 2px;
+    transition: opacity 0.3s ease;
+  }
+  .taller-item:hover .taller-icon,
+  .taller-item[open] .taller-icon { opacity: 1; }
+
+  .taller-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .taller-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+  }
+  .taller-item:hover .taller-title,
+  .taller-item[open] .taller-title { color: var(--accent); }
+
+  .taller-summary {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .taller-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .taller-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Toggle icon: + when closed, − when open */
+  .taller-toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-subtle);
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    transition: border-color 0.3s ease;
+  }
+  .taller-toggle-icon::after { content: '+'; }
+  .taller-item[open] .taller-toggle-icon::after { content: '−'; }
+
+  .taller-item:hover .taller-toggle-icon,
+  .taller-item[open] .taller-toggle-icon { border-color: var(--accent); }
+
+  /* Panel body */
+  @keyframes panelSlideDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .taller-panel-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: panelSlideDown 0.6s ease-out;
+  }
+
+  .taller-panel-img {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .taller-panel-desc {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .taller-panel-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .taller-panel-list li {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    padding-left: 14px;
+    position: relative;
+  }
+  .taller-panel-list li::before {
+    content: '◇';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.55rem;
+    top: 3px;
+  }
+
+  @media (max-width: 768px) {
+    .talleres-grid { grid-template-columns: 1fr; }
+    .taller-panel-list { grid-template-columns: 1fr; }
+  }
+</style>
