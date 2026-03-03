@@ -4,6 +4,7 @@
 
 <section id="inicio" class="hero">
   <div class="hero-bg">
+    <img class="hero-bg-img" src="/images/vale2.jpg" alt="" aria-hidden="true" />
     <div class="hero-gradient"></div>
     <div class="hero-lines">
       <div class="line"></div>
@@ -75,11 +76,23 @@
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image: url('/images/vale2.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    opacity: 0.15; /* Subdued so text is readable */
+    overflow: hidden;
+  }
+
+  .hero-bg-img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 30vh);
+    object-fit: cover;
+    object-position: top center;
+    opacity: 0.15;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   .hero-gradient {
@@ -331,3 +344,31 @@
     }
   }
 </style>
+
+<script>
+  const heroImg = document.querySelector('.hero-bg-img') as HTMLElement | null;
+  const hero = document.querySelector('.hero') as HTMLElement | null;
+
+  if (heroImg && hero) {
+    let ticking = false;
+
+    function updateParallax() {
+      const scrollY = window.pageYOffset || window.scrollY;
+      const heroHeight = hero!.offsetHeight;
+      if (scrollY <= heroHeight * 1.2) {
+        heroImg!.style.transform = `translate3d(0, ${scrollY * 0.35}px, 0)`;
+      }
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Run on load in case page starts scrolled
+    updateParallax();
+  }
+</script>
