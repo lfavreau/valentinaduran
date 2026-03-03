@@ -80,15 +80,19 @@
   }
 
   .hero-bg-img {
+    display: block;
     position: absolute;
-    top: -15%;
+    top: -15vh;
     left: 0;
     width: 100%;
-    height: 130%;
+    height: calc(100% + 30vh);
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
     opacity: 0.15;
-    will-change: transform;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   .hero-gradient {
@@ -349,10 +353,10 @@
     let ticking = false;
 
     function updateParallax() {
-      const scrollY = window.scrollY;
+      const scrollY = window.pageYOffset || window.scrollY;
       const heroHeight = hero!.offsetHeight;
-      if (scrollY <= heroHeight) {
-        heroImg!.style.transform = `translateY(${scrollY * 0.3}px)`;
+      if (scrollY <= heroHeight * 1.2) {
+        heroImg!.style.transform = `translate3d(0, ${scrollY * 0.35}px, 0)`;
       }
       ticking = false;
     }
@@ -363,5 +367,8 @@
         ticking = true;
       }
     }, { passive: true });
+
+    // Run on load in case page starts scrolled
+    updateParallax();
   }
 </script>
