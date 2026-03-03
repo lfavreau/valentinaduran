@@ -51,7 +51,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px;
+    scroll-padding-top: 70px;
 }
 
 body {
@@ -131,7 +131,8 @@ a:hover {
 
 /* ---------- Section ---------- */
 .section {
-    padding: var(--section-padding) 0;
+    padding-top: clamp(30px, 4vw, 50px);
+    padding-bottom: var(--section-padding);
     position: relative;
 }
 
