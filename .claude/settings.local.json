@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh pr list --state open)",
+      "Bash(where gh)"
+    ]
+  }
+}

@@ -75,7 +75,7 @@ const proyectos = [
               </span>
               <span class="rec-summary">{evento.summary}</span>
             </span>
-            <span class="rec-toggle-icon" aria-hidden="true"></span>
+            <img class="rec-preview-img" src={evento.image} alt={evento.title} loading="lazy" />
           </summary>
 
           <div class="rec-panel-body panel-animate">
@@ -120,12 +120,18 @@ const proyectos = [
 
   .rec-trigger {
     display: grid;
-    grid-template-columns: 1fr 36px;
-    gap: 20px;
-    align-items: center;
-    padding: 24px 28px;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 0;
+    align-items: stretch;
+    padding: 0;
     cursor: pointer;
     list-style: none;
+  }
+  .rec-item[open] .rec-trigger {
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 28px;
   }
   .rec-trigger::-webkit-details-marker { display: none; }
   .rec-trigger::marker { display: none; content: ''; }
@@ -133,7 +139,22 @@ const proyectos = [
   .rec-info {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 4px;
+    padding: 24px 28px;
+  }
+  .rec-item[open] .rec-info {
+    padding: 0;
+  }
+  .rec-preview-img {
+    width: 100%;
+    height: clamp(150px, 18vw, 240px);
+    object-fit: cover;
+    object-position: center top;
+    border-left: 1px solid var(--border-subtle);
+  }
+  .rec-item[open] .rec-preview-img {
+    display: none;
   }
 
   .rec-title {
@@ -158,24 +179,6 @@ const proyectos = [
     color: var(--text-secondary);
   }
 
-  .rec-toggle-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border: 1px solid var(--border-subtle);
-    font-size: 1.3rem;
-    font-weight: 300;
-    color: var(--accent);
-    line-height: 1;
-    transition: border-color 0.3s ease;
-  }
-  .rec-toggle-icon::after { content: '+'; }
-  .rec-item[open] .rec-toggle-icon::after { content: '−'; }
-  .rec-item:hover .rec-toggle-icon,
-  .rec-item[open] .rec-toggle-icon { border-color: var(--accent); }
-
   /* Panel */
   @keyframes panelSlideDown {
     from { opacity: 0; transform: translateY(-30px); }
@@ -194,6 +197,7 @@ const proyectos = [
     width: 100%;
     max-height: 280px;
     object-fit: cover;
+    object-position: center top;
     border: 1px solid rgba(255,255,255,0.04);
   }
 
@@ -227,8 +231,20 @@ const proyectos = [
 
   @media (max-width: 768px) {
     .rec-trigger {
+      padding: 0;
+      gap: 0;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    }
+    .rec-item[open] .rec-trigger {
+      grid-template-columns: 1fr;
       padding: 20px;
       gap: 12px;
+    }
+    .rec-info {
+      padding: 20px;
+    }
+    .rec-item[open] .rec-info {
+      padding: 0;
     }
     .rec-panel-body { padding: 20px; }
     .rec-panel-list { grid-template-columns: 1fr; }

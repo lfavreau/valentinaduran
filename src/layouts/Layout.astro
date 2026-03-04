@@ -103,6 +103,9 @@ const {
         const summary = det.querySelector('summary')!;
         let animating = false;
 
+        // Closed cards use align-self:start so grid doesn't stretch them
+        if (!det.open) det.style.alignSelf = 'start';
+
         summary.addEventListener('click', (e) => {
           e.preventDefault();
           if (animating) return;
@@ -110,8 +113,10 @@ const {
 
           if (det.open) {
             // === CLOSING ===
-            const startH = det.offsetHeight;
             const content = det.querySelector('summary ~ *') as HTMLElement;
+            const startH = det.offsetHeight;
+            const endH = summary.offsetHeight + parseFloat(getComputedStyle(det).borderTopWidth) + parseFloat(getComputedStyle(det).borderBottomWidth);
+            det.style.alignSelf = 'start';
             // Fade out content
             if (content) {
               content.animate(
@@ -120,19 +125,21 @@ const {
               );
             }
             // Shrink card height
-            const endH = summary.offsetHeight;
+            det.style.overflow = 'hidden';
             det.animate(
               [
-                { height: startH + 'px', overflow: 'hidden' },
-                { height: endH + 'px', overflow: 'hidden' },
+                { height: startH + 'px' },
+                { height: endH + 'px' },
               ],
               { duration: 350, easing: 'ease-in-out' }
             ).onfinish = () => {
+              det.style.overflow = '';
               det.open = false;
               animating = false;
             };
           } else {
             // === OPENING ===
+            det.style.alignSelf = '';
             const startH = det.offsetHeight;
             det.open = true;
             const endH = det.offsetHeight;

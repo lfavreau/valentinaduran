@@ -10,8 +10,7 @@ const obrasDisponibles = [
       'Dramaturgia e interpretación: Valentina Durán',
       'Estreno: 2025'
     ],
-    description: 'Monólogo que presenta al personaje de Miriam, una trabajadora del aseo, que debe quedarse encerrada en su horario de almuerzo. Este hecho, la lleva a cuestionar sus condiciones laborales y las relaciones de poder que se ejercen en su entorno. En un ambiente laboral cada vez más impersonal, mercantil y digital, Miriam deberá enfrentar sus propios razonamientos, anhelos y discrepancias, con las posibilidades que tiene para cambiar su destino.',
-    link: '#' // Placeholder para Link descarga dossier
+    description: 'Monólogo que presenta al personaje de Miriam, una trabajadora del aseo, que debe quedarse encerrada en su horario de almuerzo. Este hecho, la lleva a cuestionar sus condiciones laborales y las relaciones de poder que se ejercen en su entorno. En un ambiente laboral cada vez más impersonal, mercantil y digital, Miriam deberá enfrentar sus propios razonamientos, anhelos y discrepancias, con las posibilidades que tiene para cambiar su destino.'
   },
   {
     title: 'Flor de Humedal',
@@ -23,8 +22,7 @@ const obrasDisponibles = [
       'Autoría: Valentina Durán',
       'Estreno: 2024'
     ],
-    description: 'Cuenta la historia de un grupo de animales que habitan un humedal en la región del Biobío, y que ve amenazado su hábitat por la codicia humana que rellena las aguas para hacer grandes construcciones de cemento sin considerar el bienestar del ecosistema, flora y fauna, ni de las personas que habitan alrededor. Los animales huyen asustados e indefensos sin saber qué hacer y teniendo mucho miedo de los humanos, hasta que conocen a un niña, Flor, quien se gana su confianza y juntos inician un plan de rescate del lugar.',
-    link: '#' // Placeholder para Link descarga dossier
+    description: 'Cuenta la historia de un grupo de animales que habitan un humedal en la región del Biobío, y que ve amenazado su hábitat por la codicia humana que rellena las aguas para hacer grandes construcciones de cemento sin considerar el bienestar del ecosistema, flora y fauna, ni de las personas que habitan alrededor. Los animales huyen asustados e indefensos sin saber qué hacer y teniendo mucho miedo de los humanos, hasta que conocen a un niña, Flor, quien se gana su confianza y juntos inician un plan de rescate del lugar.'
   }
 ];
 
@@ -82,7 +80,6 @@ const obrasAnteriores = [
   }
 ];
 
-const todasLasObras = [...obrasDisponibles, ...obrasAnteriores];
 ---
 
 <section id="obras" class="section obras-section">
@@ -95,9 +92,9 @@ const todasLasObras = [...obrasDisponibles, ...obrasAnteriores];
       </p>
     </div>
 
-    <div class="obras-list stagger">
-      {todasLasObras.map((obra, i) => (
-        <details class="obra-item reveal">
+    <div class="obras-destacadas stagger">
+      {obrasDisponibles.map((obra) => (
+        <details class="obra-item obra-item--destacada reveal">
           <summary class="obra-trigger">
             <span class="obra-info">
               <span class="obra-meta">
@@ -108,7 +105,7 @@ const todasLasObras = [...obrasDisponibles, ...obrasAnteriores];
               <span class="obra-title">{obra.title}</span>
               <span class="obra-summary">{obra.summary}</span>
             </span>
-            <span class="obra-toggle-icon" aria-hidden="true"></span>
+            <img class="obra-preview-img" src={obra.image} alt={obra.title} loading="lazy" />
           </summary>
 
           <div class="obra-panel-body panel-animate">
@@ -120,11 +117,37 @@ const todasLasObras = [...obrasDisponibles, ...obrasAnteriores];
                   <li>{d}</li>
                 ))}
               </ul>
-              {obra.link && (
-                <div class="obra-download">
-                  <a href={obra.link} class="btn btn-ghost btn-sm">Descarga dossier</a>
-                </div>
-              )}
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <div class="obras-list stagger">
+      {obrasAnteriores.map((obra) => (
+        <details class="obra-item reveal">
+          <summary class="obra-trigger">
+            <span class="obra-info">
+              <span class="obra-meta">
+                <span class="obra-year">{obra.year}</span>
+                <span class="obra-dot">·</span>
+                <span class="obra-genre">{obra.genre}</span>
+              </span>
+              <span class="obra-title">{obra.title}</span>
+              <span class="obra-summary">{obra.summary}</span>
+            </span>
+            <img class="obra-preview-img" src={obra.image} alt={obra.title} loading="lazy" />
+          </summary>
+
+          <div class="obra-panel-body panel-animate">
+            <img class="obra-panel-img" src={obra.image} alt={obra.title} loading="lazy" />
+            <div class="obra-panel-text">
+              <p class="obra-panel-desc">{obra.description}</p>
+              <ul class="obra-panel-list">
+                {obra.details.map((d) => (
+                  <li>{d}</li>
+                ))}
+              </ul>
             </div>
           </div>
         </details>
@@ -167,10 +190,18 @@ const todasLasObras = [...obrasDisponibles, ...obrasAnteriores];
     background: var(--bg-secondary);
   }
 
-  .obras-list {
-    display: flex;
-    flex-direction: column;
+  .obras-destacadas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .obras-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    align-items: start;
   }
 
   .obra-item {
@@ -187,12 +218,21 @@ const todasLasObras = [...obrasDisponibles, ...obrasAnteriores];
 
   .obra-trigger {
     display: grid;
-    grid-template-columns: 1fr 40px;
-    gap: 20px;
-    align-items: center;
-    padding: 24px 28px;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 0;
+    align-items: stretch;
+    padding: 0;
     cursor: pointer;
     list-style: none;
+  }
+  .obra-item[open] .obra-trigger {
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 28px;
+  }
+  .obras-list .obra-item:not([open]) .obra-trigger {
+    min-height: 230px;
   }
   .obra-trigger::-webkit-details-marker { display: none; }
   .obra-trigger::marker { display: none; content: ''; }
@@ -200,7 +240,22 @@ const todasLasObras = [...obrasDisponibles, ...obrasAnteriores];
   .obra-info {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 4px;
+    padding: 24px 28px;
+  }
+  .obra-item[open] .obra-info {
+    padding: 0;
+  }
+  .obra-preview-img {
+    width: 100%;
+    height: clamp(150px, 18vw, 240px);
+    object-fit: cover;
+    object-position: center top;
+    border-left: 1px solid var(--border-subtle);
+  }
+  .obra-item[open] .obra-preview-img {
+    display: none;
   }
 
   .obra-meta {
@@ -237,25 +292,6 @@ const todasLasObras = [...obrasDisponibles, ...obrasAnteriores];
     color: var(--text-secondary);
   }
 
-  /* Toggle icon */
-  .obra-toggle-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border: 1px solid var(--border-subtle);
-    font-size: 1.3rem;
-    font-weight: 300;
-    color: var(--accent);
-    line-height: 1;
-    transition: border-color 0.3s ease;
-  }
-  .obra-toggle-icon::after { content: '+'; }
-  .obra-item[open] .obra-toggle-icon::after { content: '−'; }
-  .obra-item:hover .obra-toggle-icon,
-  .obra-item[open] .obra-toggle-icon { border-color: var(--accent); }
-
   /* Panel */
   @keyframes panelSlideDown {
     from { opacity: 0; transform: translateY(-30px); }
@@ -274,6 +310,7 @@ const todasLasObras = [...obrasDisponibles, ...obrasAnteriores];
     width: 100%;
     max-height: 280px;
     object-fit: cover;
+    object-position: center top;
     display: block;
     border: 1px solid rgba(255,255,255,0.04);
   }
@@ -310,10 +347,6 @@ const todasLasObras = [...obrasDisponibles, ...obrasAnteriores];
     color: var(--accent);
     font-size: 0.55rem;
     top: 3px;
-  }
-
-  .obra-download {
-    margin-top: 16px;
   }
 
   .extras-grid {
@@ -359,10 +392,28 @@ const todasLasObras = [...obrasDisponibles, ...obrasAnteriores];
   }
 
   @media (max-width: 768px) {
+    .obras-destacadas,
+    .obras-list {
+      grid-template-columns: 1fr;
+    }
+    .obras-list .obra-item:not([open]) .obra-trigger {
+      min-height: auto;
+    }
     .obra-trigger {
-      grid-template-columns: 1fr 36px;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      padding: 0;
+      gap: 0;
+    }
+    .obra-item[open] .obra-trigger {
+      grid-template-columns: 1fr;
       padding: 20px;
       gap: 12px;
+    }
+    .obra-info {
+      padding: 20px;
+    }
+    .obra-item[open] .obra-info {
+      padding: 0;
     }
     .obra-panel-body { padding: 20px; }
     .obra-panel-list { grid-template-columns: 1fr; }
@@ -372,3 +423,4 @@ const todasLasObras = [...obrasDisponibles, ...obrasAnteriores];
     }
   }
 </style>
+
