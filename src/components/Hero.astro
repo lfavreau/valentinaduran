@@ -29,29 +29,30 @@
     </div>
     <div class="hero-desc reveal" style="--delay: 0.6s">
       <p>
-        Actriz, licenciada en actuación. Egresada de Magíster en Pedagogía Teatral. 
-        Es co fundadora y directora de la compañía Teatrhoy.
-        Ha sido docente y dirigido múltiples procesos teatrales.
+        Actriz, licenciada en actuación. Egresada de Magíster en Pedagogía Teatral.
+        Ha participado como actriz en diversas compañías teatrales.
+        Es co fundadora y directora de la compañía Teatrhoy creada en el 2005.
+        Realiza talleres de Teatro y ha dirigido múltiples procesos de creación en compañías de teatro,
+        universidades, centros culturales y para organismos públicos y privados.
       </p>
       <details class="hero-bio-details">
         <summary class="hero-bio-summary btn btn-ghost btn-sm"><span class="summary-text">Leer más...</span></summary>
         <div class="hero-bio-expanded">
-          <p>                         
-            Desde el 2011 trabaja en el <a href = "https://www.ftb.cl" target="_blank" rel="noopener noreferrer">Festival Internacional de Teatro del Biobío</a> en donde actualemente es coordinadora de vinculación y territorio.
-            Fue productora regional de la Fundación Trashumantes entre el 2019 y 2021. Fue coordinadora regional de la iniciativa estatal Patios Culturales en el 2023.
-            Ha sido gestora de espacios artísticos, Del Aire Artería 2010-2013, 3A Estudio 2014-2015, Sala Namaste 2025 a la actualidad.
+          <p>
+            Fue directora del circuito de recreaciones históricas del Biobío, escribiendo guiones y formando y dirigiendo elencos en diversas comunas de la región, realizando 42 funciones en espacios históricos abiertos, campos, playa, parques, plazas y fuertes. 
+            Su obra (dramaturgia y dirección) Campo de Batalla. Las Ruinas de Estocolmo obtuvo el premio Ceres Teatro, el texto fue seleccionado por la Editorial Destierros y publicado en el libro Voces Trasandinas. Antología de dramaturgas emergentes de Chile y Argentina, y seleccionada para Biobío y Santiago a Mil.
           </p>
           <p>
-            En el 2025 continuó con funciones de Flor de Humedal de su autoría (estrenada el 2024), estrenó el monólogo Hora de Colación 
-            (dramaturgia e interpretación), y realizó dos temporadas de su Taller de Teatro Nocturno en Concepción. 
-            En enero del 2026 realizó el Taller de Teatro de Verano en dos secciones mañana y tarde.
+            Fue directora para el Centro Cultural La Espada y el Canelo y para la Corporación Cultural Municipal de Nacimiento dirigiendo múltiples procesos destacando la obra La Asamblea de las Mujeres, que realizó una itinerancia por la región. Dirigió el proceso de creación de la obra Cruzando el río. Memorias pedregosas, para el festival FAMCA (Festival de arte y memoria del carbón) de Curanilahue, con elenco y orquesta local.
+          </p>
+          <p>
+            Ha sido gestora de espacios artísticos en Concepción, programando temporadas de teatro y exposiciones de artes visuales. Ha sido coordinadora regional de iniciativas artístico culturales comunitarias y estatales. Desde el 2025 está a cargo del espacio de desarrollo personal, artes y cultura Sala Namaste. Desde el 2011 trabaja en el <a href="https://www.ftb.cl" target="_blank" rel="noopener noreferrer">Festival Internacional de Teatro del Biobío</a> en donde es coordinadora de vinculación y territorio.
+          <p>
+            En el 2025 continuó con funciones de Flor de Humedal de su autoría (estrenada el 2024), estrenó el monólogo Hora de Colación (dramaturgia e interpretación), y realizó dos temporadas del Taller de Teatro Nocturno en Concepción. En enero del 2026 realizó el Taller de Teatro de Verano en dos secciones.
           </p>
         </div>
+        <button class="btn btn-ghost hero-bio-close-btn">Leer menos</button>
       </details>
-    </div>
-    <div class="hero-cta reveal" style="--delay: 0.8s">
-      <a href="#obras" class="btn">Explorar Obras</a>
-      <a href="#contacto" class="btn btn-ghost">Contacto</a>
     </div>
   </div>
 
@@ -228,6 +229,8 @@
     line-height: 1.8;
     color: var(--text-muted);
     transition-delay: var(--delay, 0s);
+    text-align: justify;
+    text-align-last: center;
   }
   .hero-desc p {
     margin-bottom: 16px;
@@ -238,7 +241,8 @@
 
   .hero-bio-details {
     margin-top: 24px;
-    text-align: center;
+    text-align: justify;
+    text-align-last: center;
   }
   
   .hero-bio-summary {
@@ -272,6 +276,13 @@
   @keyframes fadeInBio {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-bio-close-btn {
+    margin-top: 24px; /* Espacio superior para el botón */
+    width: fit-content; /* Ajustar el ancho al contenido */
+    margin-left: auto; /* Centrar el botón */
+    margin-right: auto; /* Centrar el botón */
   }
 
   .hero-cta {
@@ -369,5 +380,19 @@
 
     // Run on load in case page starts scrolled
     updateParallax();
+  }
+
+  // Script para el botón "Leer menos"
+  const bioDetails = document.querySelector('.hero-bio-details') as HTMLDetailsElement | null;
+  const closeBioBtn = document.querySelector('.hero-bio-close-btn') as HTMLButtonElement | null;
+  // Obtenemos una referencia a la sección principal del hero con id="inicio"
+  const heroSection = document.getElementById('inicio');
+
+  if (bioDetails && closeBioBtn && heroSection) {
+    closeBioBtn.addEventListener('click', () => {
+      bioDetails.open = false;
+      // Desplazarse de vuelta a la sección principal del hero
+      heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
 </script>

@@ -320,7 +320,7 @@ const obrasAnteriores = [
 
   .obra-panel-img {
     width: 100%;
-    max-height: 280px;
+    height: 280px;
     object-fit: cover;
     object-position: center top;
     display: block;
@@ -484,4 +484,71 @@ const obrasAnteriores = [
   }
 </style>
 
+<script>
+(function () {
+  function getObrasImgs(): NodeListOf<HTMLImageElement> {
+    return document.querySelectorAll<HTMLImageElement>('.obra-preview-img, .obra-panel-img');
+  }
 
+  function markPortrait(img: HTMLImageElement) {
+    if (img.naturalHeight > img.naturalWidth) {
+      img.dataset.portrait = '1';
+      updateParallax();
+    }
+  }
+
+  function checkImg(img: HTMLImageElement) {
+    if (img.complete && img.naturalWidth > 0) {
+      markPortrait(img);
+    } else {
+      img.addEventListener('load', () => markPortrait(img), { once: true });
+    }
+  }
+
+  let ticking = false;
+
+  function updateParallax() {
+    const vh = window.innerHeight;
+    getObrasImgs().forEach((img) => {
+      if (img.dataset.portrait !== '1') return;
+      const rect = img.getBoundingClientRect();
+      // Skip hidden or off-screen images
+      if (rect.width === 0 || rect.height === 0) return;
+      if (rect.bottom < 0 || rect.top > vh) return;
+
+      // progress 0 = imagen entrando por abajo, 1 = saliendo por arriba
+      const progress = 1 - rect.bottom / (vh + rect.height);
+      const p = Math.max(0, Math.min(1, progress));
+      // interpolar entre 15% y 35%
+      const yPos = 15 + p * 20;
+      img.style.objectPosition = `center ${yPos}%`;
+    });
+    ticking = false;
+  }
+
+  // Escaneo inicial
+  getObrasImgs().forEach(checkImg);
+
+  // Cuando se abre un <details>, escanear sus imágenes (panel)
+  document.querySelectorAll<HTMLDetailsElement>('.obra-item').forEach((det) => {
+    det.addEventListener('toggle', () => {
+      if (det.open) {
+        det.querySelectorAll<HTMLImageElement>('.obra-preview-img, .obra-panel-img').forEach(checkImg);
+      }
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Por si las imágenes ya estaban cargadas al ejecutar
+  window.addEventListener('load', () => {
+    getObrasImgs().forEach(checkImg);
+    updateParallax();
+  });
+})();
+</script>
