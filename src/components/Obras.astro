@@ -92,6 +92,31 @@ const obrasAnteriores = [
       </p>
     </div>
 
+  <div class="compania-wrap reveal">
+    <details class="compania-item">
+      <summary class="compania-trigger">
+        <span class="compania-kicker">Teatro en los tiempos que corren</span>
+        <h3 class="compania-title">Compañía TeatrHoy</h3>
+        <p class="compania-summary">
+          La Compañía Teatrhoy nace en el año 2005 en Concepción, Chile. Es fundada por Valentina Durán y Roxana Concha mientras egresaban de la primera generación de la carrera de Teatro de la Universidad del Desarrollo. Su trabajo se caracteriza por su carácter experimental y las creaciones colectivas y propias que resuenan con la sociedad contemporánea y sus problemáticas. Desde el 2018 la compañía es dirigida por Valentina Durán.
+        </p>
+      </summary>
+
+      <div class="compania-panel panel-animate">
+        <h4 class="extra-title">Otras Obras de TeatrHoy</h4>
+        <ul class="extra-list">
+          <li>"Paraíso. 30 años como 50 años como 500 años"</li>
+          <li>"Mano a mano"</li>
+          <li>"Cuando Silencie"</li>
+          <li>"Sara Llora"</li>
+          <li>"Niño no te rías"</li>
+          <li>"Cuando gritábamos", muestra de dramaturgia alemana.</li>
+          <li>"Comedia que no acaba", colaboración con colectivo internacional Nadieshda.</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
     <div class="obras-destacadas stagger">
       {obrasDisponibles.map((obra) => (
         <details class="obra-item obra-item--destacada reveal">
@@ -154,30 +179,7 @@ const obrasAnteriores = [
       ))}
     </div>
 
-        <div class="compania-wrap reveal" style="margin-top: 60px;">
-      <details class="compania-item">
-        <summary class="compania-trigger">
-          <span class="compania-kicker">Teatro en los tiempos que corren</span>
-          <h3 class="compania-title">Compañía TeatrHoy</h3>
-          <p class="compania-summary">
-            La Compañía Teatrhoy nace en el año 2005 en Concepción, Chile. Es fundada por Valentina Durán y Roxana Concha mientras egresaban de la primera generación de la carrera de Teatro de la Universidad del Desarrollo. Su trabajo se caracteriza por su carácter experimental y las creaciones colectivas y propias que resuenan con la sociedad contemporánea y sus problemáticas. Desde el 2018 la compañía es dirigida por Valentina Durán.
-          </p>
-        </summary>
 
-        <div class="compania-panel panel-animate">
-          <h4 class="extra-title">Otras Obras de TeatrHoy</h4>
-          <ul class="extra-list">
-            <li>"Paraíso. 30 años como 50 años como 500 años"</li>
-            <li>"Mano a mano"</li>
-            <li>"Cuando Silencie"</li>
-            <li>"Sara Llora"</li>
-            <li>"Niño no te rías"</li>
-            <li>"Cuando gritábamos", muestra de dramaturgia alemana.</li>
-            <li>"Comedia que no acaba", colaboración con colectivo internacional Nadieshda.</li>
-          </ul>
-        </div>
-      </details>
-    </div>
 
     <div class="obras-extras reveal" style="margin-top: 24px;">
       <div class="extras-grid">
@@ -359,6 +361,11 @@ const obrasAnteriores = [
     color: var(--accent);
     font-size: 0.55rem;
     top: 3px;
+  }
+
+  .compania-wrap {
+    margin-top: 60px;
+    margin-bottom: 40px;
   }
 
   .compania-item {
