@@ -469,6 +469,19 @@
     if (!status || !form) return;
 
     const data = new FormData(form);
+    
+    // Combinar Asunto y Mensaje en un solo campo
+    const subject = data.get('subject') || 'Sin asunto';
+    const message = data.get('message');
+    data.set('message', `Asunto: ${subject}\n\nMensaje: ${message}`);
+    data.delete('subject'); // Eliminar para evitar duplicidad en el correo
+
+    const btn = form.querySelector('.form-btn') as HTMLButtonElement;
+    const btnText = btn.querySelector('.btn-text');
+    const originalText = btnText?.textContent;
+    if (btnText) btnText.textContent = "Enviando...";
+    btn.disabled = true;
+
     try {
       const response = await fetch(form.action, {
         method: form.method,
