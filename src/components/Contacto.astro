@@ -60,7 +60,7 @@
         </div>
       </div>
 
-      <form class="contacto-form reveal-right" id="contact-form">
+      <form action="https://formspree.io/f/mnjglqoo" method="POST" class="contacto-form reveal-right" id="contact-form">
         <div class="form-group">
           <label for="name" class="form-label">Nombre</label>
           <input type="text" id="name" name="name" class="form-input" required placeholder="Tu nombre" />
@@ -78,9 +78,10 @@
           <textarea id="message" name="message" class="form-input form-textarea" required rows="5" placeholder="Cuéntanos sobre tu proyecto..."></textarea>
         </div>
         <button type="submit" class="btn form-btn">
-          Enviar Mensaje
+          <span class="btn-text">Enviar Mensaje</span>
           <span class="btn-arrow">→</span>
         </button>
+        <div id="form-status" class="form-status"></div>
       </form>
     </div>
   </div>
@@ -237,6 +238,25 @@
   .form-btn {
     align-self: flex-start;
     margin-top: 8px;
+      position: relative;
+    }
+
+    .form-status {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      padding: 10px;
+      display: none;
+      border-radius: 4px;
+    }
+    .form-status.success {
+      display: block;
+      background: rgba(0, 255, 100, 0.1);
+      color: #4ade80;
+    }
+    .form-status.error {
+      display: block;
+      background: rgba(255, 0, 0, 0.1);
+      color: #f87171;
   }
 
   .btn-arrow {
@@ -437,6 +457,39 @@
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal?.classList.contains('active')) {
       closeModal();
+    }
+  });
+
+  // Manejo del formulario con Formspree (AJAX para no recargar la página)
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const status = document.getElementById('form-status');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status || !form) return;
+
+    const data = new FormData(form);
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        status.innerHTML = "¡Gracias! Tu mensaje ha sido enviado correctamente.";
+        status.className = "form-status success";
+        form.reset();
+      } else {
+        const result = await response.json();
+        status.innerHTML = result.errors ? result.errors.map((error: any) => error.message).join(", ") : "Hubo un problema al enviar el formulario.";
+        status.className = "form-status error";
+      }
+    } catch (error) {
+      status.innerHTML = "Error de conexión. Inténtalo más tarde.";
+      status.className = "form-status error";
     }
   });
 </script>
