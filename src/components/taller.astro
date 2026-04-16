@@ -1,0 +1,23 @@
+---
+// src/pages/taller.astro
+// Opción de redirección directa al Google Form.
+// Esta es la opción más simple y recomendada para formularios externos
+// cuando no se desea incrustar el formulario en la página.
+
+export const prerender = true;
+
+// ¡IMPORTANTE! Reemplaza 'TU_URL_DEL_GOOGLE_FORM_AQUI' con la URL real de tu formulario de Google.
+// Puedes obtener esta URL haciendo clic en "Enviar" en tu Google Form y luego seleccionando la opción de "enlace".
+const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSckAypExGVo-Tx0uV0ceikC_sm2O-v-bdv66FtmuB2wISTPjA/viewform?usp=header'; 
+
+// Astro generará una redirección HTTP 302 (temporal) en el servidor.
+// El meta refresh es un fallback para asegurar la compatibilidad.
+export const config = {
+  redirect: googleFormUrl,
+  status: 302 // Usa 302 para redirección temporal (recomendado), 301 para permanente si la URL del formulario no cambiará.
+};
+---
+<html lang="es">
+  <head><meta charset="utf-8" /><meta http-equiv="refresh" content={`0; url=${googleFormUrl}`} /><title>Redireccionando al formulario...</title><link rel="canonical" href={googleFormUrl} /></head>
+  <body><p>Si no eres redirigido automáticamente, por favor haz clic aquí: <a href={googleFormUrl}>Formulario de Taller</a></p></body>
+</html>
