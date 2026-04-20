@@ -1,23 +1,365 @@
 ---
-// src/pages/taller.astro
-// Opción de redirección directa al Google Form.
-// Esta es la opción más simple y recomendada para formularios externos
-// cuando no se desea incrustar el formulario en la página.
+import Layout from '../layouts/Layout.astro';
 
 export const prerender = true;
 
-// ¡IMPORTANTE! Reemplaza 'TU_URL_DEL_GOOGLE_FORM_AQUI' con la URL real de tu formulario de Google.
-// Puedes obtener esta URL haciendo clic en "Enviar" en tu Google Form y luego seleccionando la opción de "enlace".
-export const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSckAypExGVo-Tx0uV0ceikC_sm2O-v-bdv66FtmuB2wISTPjA/viewform?usp=header'; 
-
-// Astro generará una redirección HTTP 302 (temporal) en el servidor.
-// El meta refresh es un fallback para asegurar la compatibilidad.
-export const config = {
-  redirect: googleFormUrl,
-  status: 302 // Usa 302 para redirección temporal (recomendado), 301 para permanente si la URL del formulario no cambiará.
-};
+const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSckAypExGVo-Tx0uV0ceikC_sm2O-v-bdv66FtmuB2wISTPjA/viewform?usp=header';
+const email = 'valentinaduranb@gmail.com';
+const whatsapp = '+56978639138';
+const whatsappUrl = 'https://wa.me/56978639138';
 ---
-<html lang="es">
-  <head><meta charset="utf-8" /><meta http-equiv="refresh" content={`0; url=${googleFormUrl}`} /><title>Redireccionando al formulario...</title><link rel="canonical" href={googleFormUrl} /></head>
-  <body><p>Si no eres redirigido automáticamente, por favor haz clic aquí: <a href={googleFormUrl}>Formulario de Taller</a></p></body>
-</html>
+
+<Layout
+  title="Taller de Teatro Nocturno III · 2026 | Valentina Durán"
+  description="Inscripción e información del Taller de Teatro Nocturno III 2026, dirigido por Valentina Durán en Sala Namaste, Concepción."
+>
+  <main class="taller-page">
+    <section class="taller-hero section">
+      <div class="container">
+        <div class="taller-heading reveal">
+          <img
+            class="taller-title-image"
+            src="/images/taller.jpg"
+            alt="Taller de Teatro Nocturno III 2026"
+          />
+          <div class="taller-actions">
+            <a class="btn taller-cta" href={googleFormUrl} target="_blank" rel="noopener noreferrer">
+              Inscripciones en este link
+              <span class="btn-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="taller-content section">
+      <div class="container taller-layout">
+        <article class="taller-copy reveal-left">
+          <div class="content-block">
+            <h2>Objetivo</h2>
+            <p>
+              El objetivo del taller es generar un encuentro creativo entre los participantes
+              mediante el aprendizaje de un lenguaje teatral, para finalizar con una muestra
+              de creación colectiva. Trabajaremos la <strong>conciencia corporal y del espacio</strong>,
+              haremos ejercicios de <strong>improvisación e interpretación</strong>, exploraremos posibilidades
+              con nuestra voz, y activaremos nuestro pensamiento a través de la escritura. En todo
+              este recorrido, activando la sensibilidad e imaginación.
+            </p>
+            <p>
+              <strong>Actuación, voz, movimiento y creación de textos</strong> se pondrán en acción a través
+              de diversas herramientas teatrales para desarrollar la expresión personal y compartida,
+              jugando, improvisando y reflexionando en función de un montaje teatral.
+            </p>
+            <p>
+              La exploración estará relacionada a la observación y experiencia individual y colectiva
+              con la ciudad de <strong>Concepción y sus alrededores</strong>. Lugares recónditos y comunes,
+              personas e historias, iconos y biografías darán forma a un montaje teatral original
+              para ser presentado al público.
+            </p>
+            <p>
+              El taller tiene una duración de <strong>3 meses</strong> y termina con una
+              <strong>muestra final</strong>.
+            </p>
+          </div>
+
+          <div class="content-block">
+            <h2>Dirigido por: Valentina Durán</h2>
+            <p>
+              Actriz, directora, gestora, productora y pedagoga teatral. Co fundadora de la compañía
+              Teatrhoy de Concepción, ha participado en múltiples montajes como dramaturga, actriz y
+              directora. Ha impartido diversos ramos, cursos y talleres en instituciones públicas y
+              privadas como universidades, oficinas del estado y centros culturales.
+            </p>
+            <p>
+              Escribió y dirigió el montaje <strong>Campo de Batalla. Las Ruinas de Estocolmo</strong>,
+              seleccionado regional por Teatro a Mil, que obtuvo el <strong>Premio Ceres 2020</strong> y cuyo
+              texto fue seleccionado y publicado en el libro <em>Voces Trasandinas, Antología de Dramaturgas
+              Emergentes de Chile y Argentina</em> por la editorial Destierros. Ha participado en importantes
+              festivales de teatro y encuentros internacionales, y es Coordinadora de vinculación y
+              territorio en el Festival Internacional de Teatro del BioBío FTB.
+            </p>
+            <p>
+              En 2025 estrenó el monólogo <strong>Hora de Colación</strong>, de su autoría e interpretación,
+              que continúa con funciones. Ese mismo año asumió la dirección de la <strong>Sala Namaste</strong>
+              en el Barrio Universitario de Concepción, donde realiza el Taller de Teatro Nocturno, que
+              llega ahora a su tercera versión.
+            </p>
+          </div>
+        </article>
+
+        <aside class="inscription-card card reveal-right" aria-labelledby="inscripcion-title">
+          <span class="card-kicker">Inscripción</span>
+          <h2 id="inscripcion-title">Taller de Teatro Nocturno III</h2>
+
+          <dl class="taller-facts">
+            <div>
+              <dt>Duración</dt>
+              <dd>3 meses</dd>
+            </div>
+            <div>
+              <dt>Fechas</dt>
+              <dd>Del jueves 7 de mayo al jueves 30 de julio 2026</dd>
+            </div>
+            <div>
+              <dt>Horario</dt>
+              <dd>Jueves de 19:00 a 21:00 hrs.</dd>
+            </div>
+            <div>
+              <dt>Lugar</dt>
+              <dd>Sala Namaste · Barrio Universitario · Concepción</dd>
+            </div>
+            <div>
+              <dt>Edad</dt>
+              <dd>Mayores de 18 años</dd>
+            </div>
+            <div>
+              <dt>Valor</dt>
+              <dd>$30.000 mensual</dd>
+            </div>
+          </dl>
+
+          <p class="payment-note">
+            Se paga al inicio de cada mes por transferencia bancaria.
+          </p>
+
+          <div class="form-callout">
+            <p>
+              Para inscribirte y reservar tu cupo, completa el siguiente formulario:
+            </p>
+            <a class="btn" href={googleFormUrl} target="_blank" rel="noopener noreferrer">
+              Inscripciones en este link
+              <span class="btn-arrow">→</span>
+            </a>
+          </div>
+
+          <p class="process-note">
+            Luego de enviado el formulario, recibirás un correo dentro de <strong>24 a 48 horas</strong>
+            con los datos para realizar la transferencia del primer mes. Una vez que envíes el
+            comprobante, recibirás toda la información para comenzar.
+          </p>
+
+          <p class="welcome-note">¡Te esperamos el jueves 7 de mayo!</p>
+
+          <div class="contact-links" aria-label="Consultas">
+            <span>Consultas</span>
+            <a href={`mailto:${email}`} class="glow-line">{email}</a>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="glow-line">
+              WhatsApp: {whatsapp}
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .taller-page {
+    min-height: 100vh;
+  }
+
+  .taller-hero {
+    padding-top: clamp(48px, 8vw, 90px);
+    padding-bottom: clamp(42px, 6vw, 78px);
+    background:
+      linear-gradient(180deg, rgba(157, 125, 197, 0.08), transparent 72%),
+      var(--bg-primary);
+  }
+
+  .taller-heading {
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .taller-title-image {
+    display: block;
+    width: min(100%, 920px);
+    max-height: min(72vh, 680px);
+    margin: 0 auto clamp(26px, 4vw, 38px);
+    object-fit: contain;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-card);
+  }
+
+  .taller-cta {
+    margin-top: 4px;
+  }
+
+  .taller-actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-arrow {
+    transition: transform 0.3s ease;
+  }
+
+  .btn:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  .taller-content {
+    padding-top: 0;
+  }
+
+  .taller-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+    gap: clamp(32px, 6vw, 72px);
+    align-items: start;
+  }
+
+  .taller-copy {
+    display: grid;
+    gap: clamp(36px, 5vw, 58px);
+  }
+
+  .content-block {
+    padding-bottom: clamp(32px, 5vw, 52px);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .content-block:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .content-block h2,
+  .inscription-card h2 {
+    margin-bottom: 20px;
+  }
+
+  .content-block p + p {
+    margin-top: 18px;
+  }
+
+  strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  em {
+    color: var(--text-primary);
+  }
+
+  .inscription-card {
+    position: sticky;
+    top: 96px;
+  }
+
+  .card-kicker {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .taller-facts {
+    display: grid;
+    gap: 0;
+    margin: 28px 0 18px;
+  }
+
+  .taller-facts div {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 16px;
+    padding: 14px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .taller-facts dt {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+
+  .taller-facts dd {
+    color: var(--text-primary);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .payment-note,
+  .process-note {
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+
+  .form-callout {
+    margin: 28px 0;
+    padding: 24px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(157, 125, 197, 0.06);
+  }
+
+  .form-callout p {
+    margin-bottom: 18px;
+    font-size: 0.95rem;
+  }
+
+  .welcome-note {
+    margin: 24px 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+    color: var(--text-primary);
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .contact-links span {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .contact-links a {
+    width: fit-content;
+    font-size: 0.92rem;
+  }
+
+  @media (max-width: 900px) {
+    .taller-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .inscription-card {
+      position: relative;
+      top: auto;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .taller-facts div {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+
+    .form-callout {
+      padding: 20px;
+    }
+
+    .form-callout .btn,
+    .taller-cta {
+      width: 100%;
+      justify-content: center;
+      padding-left: 18px;
+      padding-right: 18px;
+      text-align: center;
+    }
+  }
+</style>
