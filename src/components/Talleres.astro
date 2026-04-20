@@ -69,6 +69,13 @@ const talleres = [
       </p>
     </div>
 
+    <div class="taller-featured reveal">
+      <a class="btn taller-featured-btn" href="/taller">
+        Taller de Teatro Nocturno 3 (2026)
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+
     <div class="talleres-grid stagger">
       {talleres.map((taller) => (
         <details class="taller-item reveal-scale">
@@ -101,6 +108,24 @@ const talleres = [
 </section>
 
 <style>
+  .taller-featured {
+    display: flex;
+    justify-content: center;
+    margin: clamp(-28px, -3vw, -16px) 0 clamp(36px, 5vw, 56px);
+  }
+
+  .taller-featured-btn {
+    text-align: center;
+  }
+
+  .btn-arrow {
+    transition: transform 0.3s ease;
+  }
+
+  .btn:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+
   .talleres-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -271,6 +296,13 @@ const talleres = [
   }
 
   @media (max-width: 768px) {
+    .taller-featured-btn {
+      width: 100%;
+      justify-content: center;
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+
     .talleres-grid { grid-template-columns: 1fr; }
     .taller-panel-list { grid-template-columns: 1fr; }
     .taller-trigger {
