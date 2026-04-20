@@ -64,9 +64,6 @@ const talleres = [
     <div class="section-header">
       <span class="section-label reveal">Formación</span>
       <h2 class="section-title reveal">Talleres</h2>
-      <p class="section-subtitle reveal">
-        Espacios de aprendizaje donde el arte escénico cobra vida
-      </p>
     </div>
 
     <div class="taller-featured reveal">
@@ -76,7 +73,10 @@ const talleres = [
       </a>
     </div>
 
-    <div class="talleres-grid stagger">
+    <details class="otros-talleres reveal">
+      <summary class="otros-talleres-trigger glow-line">Otros talleres</summary>
+
+      <div class="talleres-grid stagger">
       {talleres.map((taller) => (
         <details class="taller-item reveal-scale">
           <summary class="taller-trigger">
@@ -103,7 +103,8 @@ const talleres = [
           </div>
         </details>
       ))}
-    </div>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -143,8 +144,44 @@ const talleres = [
     transform: translateX(4px);
   }
 
+  .otros-talleres {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .otros-talleres-trigger {
+    display: inline-flex;
+    margin: 0 auto clamp(24px, 4vw, 36px);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .otros-talleres-trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .otros-talleres-trigger::marker {
+    display: none;
+    content: '';
+  }
+
+  .otros-talleres:not([open]) .talleres-grid {
+    display: none;
+  }
+
+  .otros-talleres[open] .otros-talleres-trigger {
+    color: var(--accent-light);
+  }
+
   .talleres-grid {
     display: grid;
+    width: 100%;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
     align-items: start;
