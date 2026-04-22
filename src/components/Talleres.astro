@@ -351,15 +351,20 @@ const talleres = [
 
   @media (max-width: 768px) {
     .taller-featured {
-      min-height: clamp(420px, 130vw, 620px);
-      padding: 20px;
+      min-height: clamp(360px, 112vw, 340px);
+      align-items: flex-end;
+      justify-content: center;
+      padding: 20px 14px clamp(28px, 9vw, 48px);
+      background-position: center 15%;
+      background-size: 95% auto;
     }
 
     .taller-featured-btn {
-      width: 100%;
+      width: min(100%, 340px);
       justify-content: center;
-      padding-left: 18px;
-      padding-right: 18px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      font-size: 0.76rem;
     }
 
     .talleres-grid { grid-template-columns: 1fr; }
