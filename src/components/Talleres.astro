@@ -67,6 +67,12 @@ const talleres = [
     </div>
 
     <div class="taller-featured reveal">
+      <img
+        class="taller-featured-img"
+        src="/images/taller.jpg"
+        alt="Taller de Teatro Nocturno 3 (2026)"
+        loading="lazy"
+      />
       <a class="btn taller-featured-btn" href="/taller">
         Taller de Teatro Nocturno 3 (2026)
         <span class="btn-arrow">→</span>
@@ -111,24 +117,24 @@ const talleres = [
 <style>
   .taller-featured {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: clamp(360px, 58vw, 760px);
+    gap: clamp(16px, 2vw, 24px);
     margin: clamp(-28px, -3vw, -16px) 0 clamp(36px, 5vw, 56px);
     padding: clamp(24px, 5vw, 56px);
-    position: relative;
-    overflow: hidden;
     border: 1px solid var(--border-subtle);
-    background-image: url('/images/taller.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
     background-color: var(--bg-card);
   }
 
+  .taller-featured-img {
+    display: block;
+    width: min(100%, 920px);
+    height: auto;
+    object-fit: contain;
+  }
+
   .taller-featured-btn {
-    position: relative;
-    z-index: 1;
     text-align: center;
     background: rgba(10, 10, 10, 0.72);
     backdrop-filter: blur(12px);
@@ -351,7 +357,6 @@ const talleres = [
 
   @media (max-width: 768px) {
     .taller-featured {
-      min-height: clamp(420px, 130vw, 620px);
       padding: 20px;
     }
 
